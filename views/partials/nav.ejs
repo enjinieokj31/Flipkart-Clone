@@ -1,0 +1,214 @@
+<nav class="navbar navbar-expand-lg navbar-light bg-light">
+    <div class="container-fluid bg-primary">
+        <a class="navbar-brand ms-5" href="#"> 
+         <img src="/public/images/flip.jpg" alt="Bootstrap" width="100" height="40"class="bg-bark border-success" data-bs-theme="dark">
+        </a>
+
+      
+     
+      <div class="collapse navbar-collapse" id="navbarSupportedContent">
+        <ul class="navbar-nav me-auto mb-2 mb-lg-0">
+                <% if (locals.user) { %>
+                    <li class="nav-item px-1 custom-drop d-flex align-items-center ms-2">
+                        <i class="fa-solid fa-user text-white"></i>
+                        <a id="hoveronme" class="nav-link active text-white" aria-current="page" href="#"><%=user.name.split(" ")[0]%></a>
+                            
+                        <div class="hidden-div">
+                           <ul class="list">
+                            <li class="item"><a href="#">My Profile</a></li>
+                            <li class="item"><a href="#">Flipkart Plus Zone</a></li>
+                            <li class="item"><a href="/myorders">Orders</a></li>
+                            <li class="item"><a href="#">Wishlist</a></li>
+                            <li class="item"><a href="/user/logout">Logout</a></li>
+                           </ul>
+                        </div>
+                          
+                      </li>
+                <% } else { %>
+        
+                    <li class="nav-item px-1 custom-drop">
+                        <a id="hoveronme" class="nav-link active text-white" data-bs-toggle="modal" data-bs-target="#login"aria-current="page" href="#" id="loginLink">Login</a>
+                      
+                        <div class="hidden-div">
+                           <ul class="list">
+                            <div class="parent">
+                                <li class="item1">New Customer?</li>
+                                <a href="#" data-bs-toggle="modal" data-bs-target="#signup">Signup</a>
+                            </div>
+                            <li class="item"><a href="#">My Profile</a></li>
+                            <li class="item"><a href="#">Flipkart Plus Zone</a></li>
+                            <li class="item"><a href="/myorders">Orders</a></li>
+                            <li class="item"><a href="#">Wishlist</a></li>
+                           </ul>
+                        </div>
+                        
+                    </li>
+
+                <% } %>
+                
+            </li>
+          <li class="nav-item px-1 d-flex align-items-center ms-2">
+            <i class="fa-solid fa-shop text-white"></i>
+            <a class="nav-link text-white" href="#">Become a Seller</a>
+          </li>
+
+          <li class="nav-item dropdown">
+            <a class="nav-link dropdown-toggle text-white" href="#" id="navbarDropdown" role="button" data-bs-toggle="dropdown" aria-expanded="false">
+              More
+            </a>
+            <ul class="dropdown-menu" aria-labelledby="navbarDropdown">
+              <li></i><a class="dropdown-item d-flex align-items-center gap-2" href="#"><i class="fa-solid fa-bell text-primary"></i>Notifiation Preferences</a></li>
+              <li><hr class="dropdown-divider"></li>
+              <li><a class="dropdown-item d-flex align-items-center gap-2" href="#"><i class="fa-solid fa-headphones text-primary"></i>24/7 Customer Care</a></li>
+              <li><hr class="dropdown-divider"></li>
+              <li><a class="dropdown-item d-flex align-items-center gap-2" href="#"><i class="fa-solid fa-arrow-trend-up text-primary"></i>Advertise</a></li>
+              <li><hr class="dropdown-divider"></li>
+              <li><a class="dropdown-item d-flex align-items-center gap-2" href="#"><i class="fa-solid fa-download text-primary"></i>Download</a></li>
+            </ul>
+          </li>
+         
+          <li class="nav-item px-1 d-flex align-items-center ms-2">
+            <i class="fa-solid fa-cart-shopping text-white"></i>
+            <a class="nav-link text-white" href="/user/cart">Cart</a>
+          </li>
+         
+    
+        </ul>
+
+
+        <form class="position-relative d-flex ms-5">
+            <input class="form-control me-2  dropdown-toggle text-white w-75" type="search" placeholder="Search" aria-label="Search" id="navbarDropdown"  data-bs-toggle="dropdown" aria-expanded="false">
+            <ul class="dropdown-menu" aria-labelledby="navbarDropdown">
+                <li>
+                    <a class="dropdown-item d-flex align-items-center gap-2" href="#"><i class="fa-solid fa-magnifying-glass"></i>mobiles</a>
+                </li>
+                <li><hr class="dropdown-divider"></li>
+                <li>
+                    <a class="dropdown-item d-flex align-items-center gap-2" href="#"><i class="fa-solid fa-magnifying-glass"></i>shoes</a>
+                </li>
+                <li><hr class="dropdown-divider"></li>
+                <li>
+                    <a class="dropdown-item d-flex align-items-center gap-2" href="#"><i class="fa-solid fa-magnifying-glass"></i>t-shirts</a>
+                </li>
+                <li><hr class="dropdown-divider"></li>
+                <li>
+                    <a class="dropdown-item d-flex align-items-center gap-2" href="#"><i class="fa-solid fa-magnifying-glass"></i>laptops</a>
+                </li>
+              </ul>
+            <button class="btn btn-outline-success text-white" type="submit">Search</button>
+          </form>
+      
+      </div>
+    </div>
+  </nav>
+
+
+  <!-- signup ==> -->
+
+
+<div class="modal fade modal-lg " id="signup" data-bs-backdrop="static" data-bs-keyboard="false" tabindex="-1"
+aria-labelledby="staticBackdropLabel" aria-hidden="true">
+<div class="modal-dialog">
+    <div class="modal-content">
+        <div class="modal-header">
+            <h1 class="modal-title fs-5" id="staticBackdropLabel"></h1>
+            <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+        </div>
+        <div class="modal-body">
+
+            <div class="container" style="margin-top: 10px;">
+                <div class="row">
+                    <div class="col-sm-6 offset-sm-3">
+                       <form action="/user/signup" method="post" onsubmit="return signupdata()">
+                        <h3 class="text-center">Looks like you're new here!</h3>
+                        <div class="mb-3 mt-2">
+                            <label for="Fullname" class="form-label">Username</label>
+                            <input type="text" class="form-control" id="Fullname" placeholder="enter your name" name="fullName" >
+                            <span id="error" class="error"></span>
+                        </div>
+                        <div class="mb-3 mt-2">
+                            <label for="emailaddress" class="form-label">Email address</label>
+                            <input type="email" class="form-control" id="emailaddress"
+                                placeholder="exmple@email.com" name="email">
+                                <span id="erroremail" class="error"></span>
+                        </div>
+                        <div class="mb-3 mt-2">
+                            <label for="Passwordaddress" class="form-label"> Create Password</label>
+                            <input type="password" class="form-control" id="Passwordaddress"
+                                placeholder="password" name="password">
+                                <span id="errorpassword" class="error"></span>
+                           
+                        </div>
+                        <div class="mb-3 mt-2">
+                            <label for="mobile" class="form-label">Phone Number</label>
+                            <input type="text" class="form-control" id="mobile"
+                                placeholder="phone number" name="phone">
+                                <span class="error" id="errorphone"></span>
+                           
+                        </div>
+                       
+                        <div class="col-auto text-center">
+                            <button type="submit" class="btn btn-outline-success mt-2 w-100">Sign up</button>
+                        </div>
+
+                       </form>
+
+                      <div class="text-center mt-3">
+                        <a href="#" class="mx-1" data-bs-toggle="modal" data-bs-target="#login">Existing User?Login</a>
+                      </div>
+
+                    </div>
+                </div>
+            </div>
+
+
+
+
+          
+        </div>
+    </div>
+</div>
+
+</div>
+
+ <!-- login   -->
+
+
+ <div class="modal fade modal-lg" id="login" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+  <div class="modal-dialog">
+      <div class="modal-content">
+          <div class="modal-header">
+              <h1 class="modal-title fs-5" id="exampleModalLabel"></h1>
+              <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+          </div>
+          <div class="modal-body">
+              <div class="container">
+                  <div class="row">
+                      <div class="col-sm-6 offset-sm-3">
+                          <h4 class="text-center mb-3">Login to your account</h4>
+                          <form action="/user/login" method="post">
+                              <div class="mb-3 mt-2">
+                                  <label for="email" class="form-label">Email address</label>
+                                  <input type="email" class="form-control" id="email"
+                                      placeholder="name@example.com" name="email">
+                              </div>
+                              <div class="mb-3">
+                                  <label for="password" class="form-label">Password</label>
+                                  <input type="password" class="form-control" id="password"
+                                      placeholder="Password" name="password">
+                              </div>
+                                  <button type="submit" class="btn btn-outline-success mt-2 w-100">Login</button> 
+                          </form>
+                         
+                          <div class="text-center mt-4">
+                              <a href="#" class="mx-1" data-bs-toggle="modal" data-bs-target="#signup">New to Flipkart? Create an Account </a>
+                          </div>
+                      </div>
+                    
+                  </div>
+              </div>
+          </div>
+
+      </div>
+  </div>
+</div>

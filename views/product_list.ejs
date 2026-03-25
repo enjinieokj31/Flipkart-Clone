@@ -1,0 +1,109 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <%-include('partials/head.ejs') %>
+    <title>Home</title>
+</head>
+<body>
+    
+    <%-include('partials/nav.ejs') %> 
+  
+    <div class="container">
+        <div class="row">
+
+            <%for(var i=0;i<product.length;i++)
+            {%>
+                <div class="col-sm-3 offset-sm-1 mt-4">
+
+                    <div class="card" style="width: 15rem;">
+                        <img src="<%=product[i].photo%>" height="200" class="card-img-top" alt="...">
+                        <div class="card-body">
+                            <div class="text-center">
+                                <h5 class="card-title"><%=product[i].name%></h5>
+                                <h6 class="card-title"> Rs <%=product[i].price%></h6>
+                                <a href="#" onclick="set_data('<%=product[i].name%>','<%=product[i].price%>')" data-bs-toggle="modal" data-bs-target="#ask_qnty" class="btn btn-primary">Buy Now</a>
+          
+                             </div>
+                        </div>
+                    </div>
+                      
+                </div>
+            <%}%>
+
+        </div>
+     </div>
+
+
+     <!-- Modal -->
+  <div class="modal fade" id="ask_qnty" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+    <div class="modal-dialog">
+      <div class="modal-content">
+        <div class="modal-header">
+          <h1 class="modal-title fs-5" id="exampleModalLabel">Hi!</h1>
+          <button type="button" class="btn-close" onclick="Earse_data()" data-bs-dismiss="modal" aria-label="Close"></button>
+        </div>
+        <div class="modal-body">
+             
+      
+            <form action="/buy" method="post">
+                <div class="mb-3">
+                  <label for="productname" class="form-label">Product Name</label>
+                  <input type="text" class="form-control" name="productname" readonly required id="productname" aria-describedby="emailHelp">
+                </div>
+
+                <div class="mb-3">
+                  <label for="productprice" class="form-label">Price</label>
+                  <input type="number" readonly name="productprice" required class="form-control" id="productprice">
+                </div>
+
+                <div class="mb-3">
+                    <label for="Qunatity" class="form-label">Quantity</label>
+                    <input type="number" name="Quantity" oninput="calculate();" required class="form-control" id="Quantity">
+                </div>
+
+                <div class="mb-3">
+                    <label for="finalprice" class="form-label">Total Price</label>
+                    <input type="number" name="finalprice" required class="form-control" id="finalprice">
+                </div>
+               
+                <button type="submit" class="btn btn-primary">Proceed now</button>
+              </form>
+
+
+
+
+
+
+        </div>
+     
+      </div>
+    </div>
+  </div>
+
+    
+
+ <script>
+       
+   function set_data(pname,pprice)
+    {
+        document.getElementById('productname').value=pname;
+        document.getElementById('productprice').value=pprice;
+    }
+    function calculate()
+    {
+        var currentprice=document.getElementById('productprice').value;
+        var qnty=document.getElementById("Quantity").value;
+        var price=parseInt(currentprice)*parseInt(qnty);
+        document.getElementById("finalprice").value=price;
+    }
+    function Earse_data()
+    {
+        document.getElementById("finalprice").value="";
+        var qnty=document.getElementById("Quantity").value="";
+    }     
+  </script>  
+
+    <%-include('partials/scripts.ejs') %>
+   
+</body>
+</html>

@@ -1,0 +1,58 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <%-include('partials/head.ejs') %>
+    <title>Add</title>
+</head>
+<body>
+
+  <%- include('partials/admin_nav.ejs') %>
+   
+  <div class="container mt-3">
+    <div class="row justify-content-center">
+      <div class="col-md-6">
+        <% if (locals.message) { %>
+          <div class="alert alert-primary text-center" role="alert">
+             <%= message %>
+          </div>
+        <% } else {%>
+        <div class="alert alert-primary text-center" role="alert">
+          Add Product
+        </div>
+        <% } %>
+        <form action="/product" method="post" enctype="multipart/form-data">
+          <div class="mb-3">
+            <label for="productName" class="form-label">Product Name</label>
+            <input type="text" id="productName" name="name" class="form-control" required>
+          </div>
+          <div class="mb-3">
+            <label for="price" class="form-label">Price</label>
+            <input type="text" id="price" name="price" class="form-control" required>
+          </div>
+          <div class="mb-3">
+            <label for="photo" class="form-label">Photo</label>
+            <input type="file" id="photo" name="photo" class="form-control" required>
+          </div>
+          <div class="mb-3">
+            <label for="category" class="form-label">Category</label>
+            <select id="category" name="category" class="form-select" required>
+              <option selected disabled value="">Select Category</option>
+              <option>Cloth</option>
+              <option>Electronic</option>
+              <option>Grocery</option>
+              <option>Footwear</option>
+              <option>Other</option>
+            </select>
+          </div>
+          <button type="submit" class="btn btn-primary">Add Now</button>
+        </form>
+      </div>
+    </div>
+  </div>
+    
+
+
+
+      <%-include('partials/scripts.ejs') %>
+</body>
+</html>

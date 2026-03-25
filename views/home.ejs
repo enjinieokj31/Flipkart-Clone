@@ -1,0 +1,30 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <%-include('partials/head.ejs') %>
+    <title>Home</title>
+</head>
+<body>
+    
+    <%-include('partials/nav.ejs') %> 
+
+    <div class="text-center">
+            <h2 id="heading">Shop Now</h2>
+    </div>
+   
+    <% if (message!=null) { %>
+        <div class="alert alert-danger pop visible" role="alert">
+             <%=message%>
+          </div>
+    <% } %>
+
+   
+
+    <%- include('partials/body.ejs') %>
+
+
+
+    <%-include('partials/scripts.ejs') %>
+   
+</body>
+</html>
